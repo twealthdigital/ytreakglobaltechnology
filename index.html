@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ytreak Global Technology | YTGT</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══ INITIAL NAVBAR (scrolls with page) ═══ -->
+  <nav class="nav-initial" id="navInitial">
+    <div class="nav-c">
+
+      <a class="nav-logo" href="#">
+        <img src="images/ytreaklogo.png" alt="YTGT" class="logo-img" />
+        <div class="logo-text">
+          <span class="logo-mark">YTGT</span>
+          <span class="logo-full">Ytreak Global Technology</span>
+        </div>
+      </a>
+
+      <div class="nav-pill">
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Portfolio</a></li>
+        </ul>
+      </div>
+
+      <a href="#" class="btn-nav">Get Start</a>
+      <button class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ═══ STICKY HEADER (slides in on scroll) ═══ -->
+  <header class="nav-sticky" id="navSticky">
+    <div class="nav-c">
+
+      <a class="nav-logo" href="#">
+        <img src="images/ytreaklogo.png" alt="YTGT" class="logo-img" />
+        <div class="logo-text">
+          <span class="logo-mark">YTGT</span>
+          <span class="logo-full">Ytreak Global Technology</span>
+        </div>
+      </a>
+
+      <div class="nav-pill">
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Portfolio</a></li>
+        </ul>
+      </div>
+
+      <a href="#" class="btn-nav">Get Start</a>
+      <button class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ═══ SIDE DRAWER ═══ -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="drawer-brand">YTGT</div>
+    <ul class="drawer-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="#" class="drawer-cta">Contact Us</a></li>
+    </ul>
+    <div class="drawer-footer">
+      <span>© 2025 Ytreak Global Technology</span>
+    </div>
+  </aside>
+
+  <!-- ═══ HERO SECTION ═══ -->
+  <section class="hero">
+    <canvas id="heroCanvas"></canvas>
+
+    <!-- floating blue blobs -->
+    <div class="blob blob-tl"></div>
+    <div class="blob blob-bl"></div>
+    <div class="blob blob-tr"></div>
+    <div class="blob blob-br"></div>
+
+    <div class="hero-wrap">
+
+      <h1 class="hero-title">
+        Empowering the Future of
+        <span class="rotate-box">
+          <span class="tw grad-text active">Digital Solutions</span>
+          <span class="tw grad-text">Scalable Systems</span>
+          <span class="tw grad-text">Global Innovation</span>
+        </span>
+        Worldwide
+      </h1>
+
+      <p class="hero-sub">
+        Empowering businesses with cutting-edge technology.<br />
+        From software development to tech consulting — we build what matters.
+      </p>
+
+      <div class="hero-card">
+        <textarea
+          class="hero-input"
+          rows="2"
+          placeholder="Tell us about your project, e.g: a web platform for a logistics company called SwiftMove"
+        ></textarea>
+        <a href="#" class="btn-blue">Get Started with YTGT</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="sn">200+</span>
+          <span class="sl">Projects Delivered</span>
+        </div>
+        <div class="sdiv"></div>
+        <div class="stat">
+          <span class="sn">50+</span>
+          <span class="sl">Global Clients</span>
+        </div>
+        <div class="sdiv"></div>
+        <div class="stat">
+          <span class="sn">8+</span>
+          <span class="sl">Years Experience</span>
+        </div>
+        <div class="sdiv"></div>
+        <div class="stat">
+          <span class="sn">4+</span>
+          <span class="sl">In Business</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ DARK / LIGHT TOGGLE ═══ -->
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+    <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
