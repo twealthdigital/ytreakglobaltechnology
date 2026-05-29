@@ -3,50 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Ytreak Global Technology | YTGT</title>
+  <title>YTGT</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- ═══ INITIAL NAVBAR (scrolls with page) ═══ -->
-  <nav class="nav-initial" id="navInitial">
+  <!-- ═══ SINGLE FIXED HEADER ═══ -->
+  <header class="nav-main" id="navMain">
     <div class="nav-c">
 
       <a class="nav-logo" href="#">
         <img src="ytreaklogo.png" alt="YTGT" class="logo-img" />
         <div class="logo-text">
           <span class="logo-mark">YTGT</span>
-          <span class="logo-full">Ytreak Global Technology</span>
-        </div>
-      </a>
-
-      <div class="nav-pill">
-        <ul class="nav-links">
-          <li><a href="#" class="active">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Portfolio</a></li>
-        </ul>
-      </div>
-
-      <a href="#" class="btn-nav">Get Start</a>
-      <button class="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-
-    </div>
-  </nav>
-
-  <!-- ═══ STICKY HEADER (slides in on scroll) ═══ -->
-  <header class="nav-sticky" id="navSticky">
-    <div class="nav-c">
-
-      <a class="nav-logo" href="#">
-        <img src="ytreaklogo.png" alt="YTGT" class="logo-img" />
-        <div class="logo-text">
-          <span class="logo-mark">YTGT</span>
-          <span class="logo-full">Ytreak Global Technology</span>
+          <span class="logo-full">Y-treak Global Technology</span>
         </div>
       </a>
 
@@ -71,7 +42,7 @@
   <div class="overlay" id="overlay"></div>
   <aside class="drawer" id="drawer">
     <button class="drawer-close" id="drawerClose" aria-label="Close menu">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div class="drawer-brand">YTGT</div>
     <ul class="drawer-links">
@@ -82,7 +53,7 @@
       <li><a href="#" class="drawer-cta">Contact Us</a></li>
     </ul>
     <div class="drawer-footer">
-      <span>© 2025 Ytreak Global Technology</span>
+      <span>© 2026 Ytreak Global Technology</span>
     </div>
   </aside>
 
@@ -109,17 +80,24 @@
       </h1>
 
       <p class="hero-sub">
-        Empowering businesses with cutting-edge technology.<br />
-        From software development to tech consulting — we build what matters.
+        Empowering businesses with cutting-edge solutions.<br />
+        From Responsive Website to Premium Mobile App — We build what matters.
       </p>
 
       <div class="hero-card">
-        <textarea
-          class="hero-input"
-          rows="2"
-          placeholder="Tell us about your project, e.g: a web platform for a logistics company called SwiftMove"
-        ></textarea>
-        <a href="#" class="btn-blue">Get Started with YTGT</a>
+        <form id="heroContactForm">
+          <input type="hidden" name="access_key" value="6f4b18be-7b98-4407-8b73-2a14abdd9d8f" />
+          <input type="hidden" name="subject" value="New Project Inquiry - YTGT" />
+          <input type="hidden" name="from_name" value="YTGT Website" />
+          <textarea
+            class="hero-input"
+            name="message"
+            rows="2"
+            placeholder="Tell us about your project..."
+            required
+          ></textarea>
+          <button type="submit" class="btn-blue">Get Started with YTGT</button>
+        </form>
       </div>
 
       <div class="hero-stats">
@@ -147,11 +125,331 @@
     </div>
   </section>
 
+  <!-- ═══ TRANSITION DIVIDER ═══ -->
+<div class="hero-transition" aria-hidden="true"></div>
+
+  <!-- ═══ ABOUT SECTION ═══ -->
+  <section class="about" id="about">
+    <div class="about-c">
+
+      <div class="about-media">
+        <div class="about-img-top">
+          <img src="aboutsectionimg1.webp" alt="Team collaboration" />
+        </div>
+        <div class="about-img-bot">
+          <img src="aboutsectionimg2.webp" alt="Tech workspace" />
+        </div>
+        <div class="about-stat-card">
+          <span class="asc-num grad-text">50+</span>
+          <div class="asc-divider"></div>
+          <span class="asc-label">Global Clients</span>
+          <p class="asc-desc">We serve businesses of all sizes around the world..</p>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <div class="about-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Welcome To Ytreak Global Technology
+        </div>
+        <h2 class="about-title">Scalable Solutions<br/>for Every Need</h2>
+        <p class="about-desc">Our technology services are designed to grow with your business. Whether you're a startup finding your footing or an established enterprise pushing new limits — we build what moves you forward.</p>
+        <ul class="about-perks">
+          <li><span class="perk-dot"></span>Software development tailored to your goals</li>
+          <li><span class="perk-dot"></span>End-to-end tech consulting &amp; strategy</li>
+          <li><span class="perk-dot"></span>8+ years delivering global digital products</li>
+        </ul>
+        <a href="#" class="btn-blue about-cta">Learn More About Us..</a>
+      </div>
+
+    </div>
+  </section>
+
+  
+
   <!-- ═══ DARK / LIGHT TOGGLE ═══ -->
   <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
     <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   </button>
+
+
+
+
+  <!-- ═══ SERVICES SECTION ═══ -->
+<section class="services" id="services">
+  <!-- White radial spots -->
+  <div class="svc-spot svc-spot-l"></div>
+  <div class="svc-spot svc-spot-r"></div>
+  
+  <!-- Subtle grid overlay -->
+  <div class="svc-grid-overlay"></div>
+
+  <div class="svc-inner">
+    
+    <!-- Main content: Left text + Right images -->
+    <div class="svc-main">
+      
+      <!-- LEFT: Write-up -->
+      <div class="svc-body">
+        <div class="about-badge svc-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <line x1="9" y1="9" x2="15" y2="9"/>
+            <line x1="9" y1="13" x2="15" y2="13"/>
+            <line x1="9" y1="17" x2="12" y2="17"/>
+          </svg>
+          What We Offer
+        </div>
+        
+        <h2 class="svc-title">
+          We Build
+          <span class="grad-text">Digital Products</span>
+          That Scale
+        </h2>
+        
+        <p class="svc-desc">
+          From concept to deployment — our end-to-end services cover everything you need to launch, grow, and dominate your market. We specialize in crafting solutions that don't just work today, but scale with you tomorrow.
+        </p>
+        
+        <ul class="svc-perks">
+          <li><span class="perk-dot"></span>Custom web & mobile development</li>
+          <li><span class="perk-dot"></span>UI/UX design that converts</li>
+          <li><span class="perk-dot"></span>Cloud infrastructure & DevOps</li>
+          <li><span class="perk-dot"></span>Ongoing support & maintenance</li>
+        </ul>
+        
+        <a href="#" class="svc-cta-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+          Explore All Services
+        </a>
+      </div>
+
+      <!-- RIGHT: Image showcase -->
+      <!-- RIGHT: Video showcase -->
+<div class="svc-media">
+  <!-- Top large video -->
+  <div class="svc-img-card svc-img-card--large">
+    <div class="svc-img-wrap">
+      <video autoplay muted loop playsinline>
+        <source src="servicewebvideo.mp4" type="video/mp4" />
+      </video>
+      <div class="svc-img-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+        Web Platforms
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom row: 2 videos -->
+  <div class="svc-media-row">
+    <!-- Bottom left video -->
+    <div class="svc-img-card">
+      <div class="svc-img-wrap">
+        <video autoplay muted loop playsinline>
+          <source src="serviceuiuxvideo.mp4" type="video/mp4" />
+        </video>
+        <div class="svc-img-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          UI/UX Design
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom right video -->
+    <div class="svc-img-card">
+      <div class="svc-img-wrap">
+        <video autoplay muted loop playsinline>
+          <source src="servicemobilevideo.mp4" type="video/mp4" />
+        </video>
+        <div class="svc-img-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/>
+          </svg>
+          Mobile Apps
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats text box -->
+  <div class="svc-stat-card">
+    <span class="svc-stat-num">200+</span>
+    <div class="svc-stat-divider"></div>
+    <span class="svc-stat-label">Projects Delivered</span>
+    <p class="svc-stat-desc">Trusted by businesses worldwide to deliver quality digital solutions.</p>
+    <div class="svc-card-underline"></div>
+  </div>
+</div>
+
+
+
+    </div>
+
+    <!-- Bottom service cards -->
+    <div class="svc-cards">
+      <!-- Card 1 -->
+      <div class="svc-card">
+        <div class="svc-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3 class="svc-card-title">Web Development</h3>
+        <p class="svc-card-desc">High-performance websites & web apps built with modern frameworks.</p>
+        <ul class="svc-card-list">
+          <li>Responsive Design</li>
+          <li>React / Next.js</li>
+          <li>E-commerce</li>
+          <li>SEO Optimized</li>
+        </ul>
+        <div class="svc-card-underline"></div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="svc-card">
+        <div class="svc-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/>
+          </svg>
+        </div>
+        <h3 class="svc-card-title">Mobile Apps</h3>
+        <p class="svc-card-desc">Native & cross-platform mobile apps for iOS and Android.</p>
+        <ul class="svc-card-list">
+          <li>React Native</li>
+          <li>Flutter Apps</li>
+          <li>App Store Deploy</li>
+          <li>Push Notifications</li>
+        </ul>
+        <div class="svc-card-underline"></div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="svc-card">
+        <div class="svc-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <h3 class="svc-card-title">UI/UX Design</h3>
+        <p class="svc-card-desc">Beautiful, intuitive interfaces that users love.</p>
+        <ul class="svc-card-list">
+          <li>User Research</li>
+          <li>Wireframing</li>
+          <li>Prototyping</li>
+          <li>Design Systems</li>
+        </ul>
+        <div class="svc-card-underline"></div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="svc-card">
+        <div class="svc-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+          </svg>
+        </div>
+        <h3 class="svc-card-title">Cloud & DevOps</h3>
+        <p class="svc-card-desc">Scalable infrastructure and seamless deployments.</p>
+        <ul class="svc-card-list">
+          <li>AWS / Azure</li>
+          <li>CI/CD Pipelines</li>
+          <li>Docker / K8s</li>
+          <li>Monitoring</li>
+        </ul>
+        <div class="svc-card-underline"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+</section>
+
+<!-- ═══ HOW WE WORK SECTION ═══ -->
+<section class="how-we-work" id="howWeWork">
+  <div class="hww-inner">
+    
+    <!-- LEFT: Tabs -->
+    <div class="hww-left">
+      <div class="about-badge hww-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Our Process
+      </div>
+      <h2 class="hww-title">How We Work</h2>
+      <p class="hww-sub">A proven approach to bring your vision to life.</p>
+
+      <div class="hww-tabs">
+        <button class="hww-tab active" data-tab="0">
+          <span class="hww-tab-num">01</span>
+          <div class="hww-tab-content">
+            <span class="hww-tab-title">Discovery</span>
+            <span class="hww-tab-desc">Deep research & strategy to understand your goals, market, and users.</span>
+          </div>
+        </button>
+        <button class="hww-tab" data-tab="1">
+          <span class="hww-tab-num">02</span>
+          <div class="hww-tab-content">
+            <span class="hww-tab-title">Design</span>
+            <span class="hww-tab-desc">Wireframes, prototypes & stunning UI crafted for conversion.</span>
+          </div>
+        </button>
+        <button class="hww-tab" data-tab="2">
+          <span class="hww-tab-num">03</span>
+          <div class="hww-tab-content">
+            <span class="hww-tab-title">Build</span>
+            <span class="hww-tab-desc">Agile development with clean code, tested at every stage.</span>
+          </div>
+        </button>
+        <button class="hww-tab" data-tab="3">
+          <span class="hww-tab-num">04</span>
+          <div class="hww-tab-content">
+            <span class="hww-tab-title">Launch</span>
+            <span class="hww-tab-desc">Deployment, monitoring & ongoing support to keep you growing.</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT: Auto-scrolling images -->
+    <div class="hww-right">
+      <div class="hww-slider-track" id="hwwSliderTrack">
+        <div class="hww-slide">
+          <img src="howslider1image.webp" alt="Discovery phase" />
+          <div class="hww-slide-caption">
+            <span>We listen first.</span>
+            <span>Your vision drives everything.</span>
+          </div>
+        </div>
+        <div class="hww-slide">
+          <img src="howslider2image.webp" alt="Design phase" />
+          <div class="hww-slide-caption">
+            <span>Pixel-perfect designs.</span>
+            <span>Crafted for real users.</span>
+          </div>
+        </div>
+        <div class="hww-slide">
+          <img src="howslider3image.webp" alt="Build phase" />
+          <div class="hww-slide-caption">
+            <span>Clean code. Solid results.</span>
+            <span>Built to scale with you.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="script.js"></script>
 
   <script src="script.js"></script>
 </body>
