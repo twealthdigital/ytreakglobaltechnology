@@ -120,13 +120,38 @@ function loop() {
 
 function initCanvas() {
   resize();
-  // Only 55 particles — fast and clean
-  pts = Array.from({ length: 55 }, () => new Dot());
-  loop();
+  pts = Array.from({ length: 20 }, () => new Dot());
 }
 
-window.addEventListener('resize', resize, { passive: true });
+let animId;
+
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+  drawGrid();
+  pts.forEach(p => p.tick());
+  animId = requestAnimationFrame(loop);
+}
+
+function stopLoop() {
+  if (animId) cancelAnimationFrame(animId);
+}
+
 initCanvas();
+loop();
+
+// Pause canvas when off screen
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      loop();
+    } else {
+      stopLoop();
+    }
+  });
+});
+observer.observe(document.querySelector('.hero'));
+
+window.addEventListener('resize', resize, { passive: true });
 
 // ── Success Modal ──
 function showSuccessModal(msg) {
