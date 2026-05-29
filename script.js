@@ -2,12 +2,11 @@
    YTGT — script.js  |  Lightweight
 ══════════════════════════════════════════ */
 
-// ── Sticky header on scroll ──
-const navInitial = document.getElementById('navInitial');
-const navSticky  = document.getElementById('navSticky');
+// ── Fixed header — add 'scrolled' class after hero ──
+const navMain = document.getElementById('navMain');
 
 window.addEventListener('scroll', () => {
-  navSticky.classList.toggle('show', window.scrollY > navInitial.offsetHeight);
+  navMain.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
 // ── Side Drawer ──
@@ -128,3 +127,135 @@ function initCanvas() {
 
 window.addEventListener('resize', resize, { passive: true });
 initCanvas();
+
+// ── Success Modal ──
+function showSuccessModal(msg) {
+  const overlay = document.createElement("div");
+  overlay.style.cssText = `
+    position:fixed;inset:0;background:rgba(0,0,0,0);
+    z-index:9999;display:flex;align-items:flex-end;
+    justify-content:center;padding-bottom:2rem;
+    transition:background .35s ease;
+  `;
+
+  const modal = document.createElement("div");
+  modal.style.cssText = `
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:2.5rem 2rem;
+    text-align:center;
+    max-width:380px;
+    width:90%;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 -8px 40px rgba(59,130,246,0.15);
+    transform:translateY(120%);
+    opacity:0;
+    transition:transform .55s cubic-bezier(.16,1,.3,1), opacity .4s ease;
+  `;
+
+  modal.innerHTML = `
+    <div style="font-size:2.8rem;margin-bottom:1rem;">✅</div>
+    <h3 style="font-family:var(--ft);font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:.6rem;">${msg || 'Message Sent!'}</h3>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.5rem;">Thank you! We'll get back to you soon.</p>
+    <button id="closeSuccessModal" style="background:var(--blue);color:#fff;border:none;padding:.6rem 1.8rem;border-radius:100px;font-size:.88rem;font-weight:600;cursor:pointer;transition:opacity .2s;">Got it</button>
+  `;
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // Animate in
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.style.background = "rgba(0,0,0,0.5)";
+      modal.style.transform = "translateY(0)";
+      modal.style.opacity = "1";
+    });
+  });
+
+  function closeModal() {
+    overlay.style.background = "rgba(0,0,0,0)";
+    modal.style.transform = "translateY(120%)";
+    modal.style.opacity = "0";
+    setTimeout(() => overlay.remove(), 500);
+  }
+
+  document.getElementById("closeSuccessModal").addEventListener("click", closeModal);
+  overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
+}
+
+// ── Contact Form (Web3Forms) ──
+const contactForm = document.getElementById('heroContactForm');
+if (contactForm) {
+  contactForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const btn = contactForm.querySelector("button[type='submit']");
+    const orig = btn ? btn.innerHTML : '';
+    if (btn) { btn.innerHTML = 'Sending...'; btn.disabled = true; }
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: new FormData(contactForm)
+      });
+      const data = await res.json();
+      if (data.success) {
+        showSuccessModal("Message Sent!");
+        contactForm.reset();
+      } else {
+        showSuccessModal("Failed to send. Please try again.");
+      }
+    } catch {
+      showSuccessModal("Network error. Please email us directly.");
+    } finally {
+      if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+    }
+  });
+}
+
+// ── How We Work Tabs ──
+const hwwTabs = document.querySelectorAll('.hww-tab');
+let hwwCurrent = 0;
+let hwwInterval;
+
+function setHwwTab(index) {
+  hwwTabs.forEach(t => {
+    t.classList.remove('active');
+    t.style.animation = '';
+  });
+  
+  const activeTab = hwwTabs[index];
+  activeTab.classList.add('active');
+  
+  // Pop-bounce effect on the active tab
+  activeTab.style.animation = 'hwwPop .45s cubic-bezier(.16,1,.3,1)';
+  setTimeout(() => {
+    activeTab.style.animation = '';
+  }, 450);
+  
+  hwwCurrent = index;
+}
+
+// Click to control
+hwwTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const idx = parseInt(tab.dataset.tab);
+    setHwwTab(idx);
+    resetHwwAuto();
+  });
+});
+
+// Auto-scroll tabs every 3s
+function startHwwAuto() {
+  hwwInterval = setInterval(() => {
+    hwwCurrent = (hwwCurrent + 1) % hwwTabs.length;
+    setHwwTab(hwwCurrent);
+  }, 3000);
+}
+
+function resetHwwAuto() {
+  clearInterval(hwwInterval);
+  startHwwAuto();
+}
+
+if (hwwTabs.length) startHwwAuto();
