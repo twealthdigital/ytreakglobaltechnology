@@ -44,67 +44,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-a, button, [role="button"] {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-}
 
-/* Ripple effect on all clickable elements */
-.btn-blue,
-.btn-nav,
-.svc-cta-btn,
-.about-cta,
-.nav-links a,
-.drawer-links a,
-.drawer-cta,
-.hww-tab,
-.svc-card,
-.theme-btn,
-.hamburger {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-blue::after,
-.btn-nav::after,
-.svc-cta-btn::after,
-.about-cta::after,
-.nav-links a::after,
-.drawer-links a::after,
-.drawer-cta::after,
-.hww-tab::after,
-.svc-card::after,
-.theme-btn::after,
-.hamburger::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.btn-blue:active::after,
-.btn-nav:active::after,
-.svc-cta-btn:active::after,
-.about-cta:active::after,
-.nav-links a:active::after,
-.drawer-links a:active::after,
-.drawer-cta:active::after,
-.hww-tab:active::after,
-.svc-card:active::after,
-.theme-btn:active::after,
-.hamburger:active::after {
-  width: 400px;
-  height: 400px;
-  opacity: 0;
-}
 
 /* ══════════════════════════════════════════
    SHARED NAV ELEMENTS
