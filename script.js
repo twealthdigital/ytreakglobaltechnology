@@ -34,11 +34,15 @@ const iconMoon = themeBtn.querySelector('.icon-moon');
 const iconSun  = themeBtn.querySelector('.icon-sun');
 let dark = true;
 
+const themeColorMeta = document.getElementById('themeColor');
+
 themeBtn.addEventListener('click', () => {
   dark = !dark;
   html.setAttribute('data-theme', dark ? 'dark' : 'light');
   iconMoon.style.display = dark ? 'block' : 'none';
   iconSun.style.display  = dark ? 'none'  : 'block';
+  // Sync status bar color with theme
+  themeColorMeta.setAttribute('content', dark ? '#0B0F1C' : '#EFF6FF');
 });
 
 // ── Rotating hero text ──
