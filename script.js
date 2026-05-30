@@ -59,7 +59,7 @@ const canvas = document.getElementById('heroCanvas');
 
 if (!prefersReduced && canvas) {
   const ctx = canvas.getContext('2d', { alpha: true });
-  let W, H, pts, animId, isVisible = true;
+  let W, H, pts, animId;
 
   function resize() {
     W = canvas.width  = window.innerWidth;
@@ -113,7 +113,6 @@ if (!prefersReduced && canvas) {
   }
 
   function loop() {
-    if (!isVisible) return;
     ctx.clearRect(0, 0, W, H);
     drawGrid();
     pts.forEach(p => p.tick());
@@ -130,15 +129,9 @@ if (!prefersReduced && canvas) {
     startLoop();
   }
 
-  // Pause when hero scrolls out of view
-  new IntersectionObserver(entries => {
-    isVisible = entries[0].isIntersecting;
-    isVisible ? startLoop() : stopLoop();
-  }, { threshold: 0.05 }).observe(document.querySelector('.hero'));
-
-  // Pause when tab is hidden — saves CPU/battery on Android
+  // Only pause when tab is hidden (switching apps etc.) — never on scroll
   document.addEventListener('visibilitychange', () => {
-    document.hidden ? stopLoop() : (isVisible && startLoop());
+    document.hidden ? stopLoop() : startLoop();
   });
 
   // Debounce resize so it doesn't fire 60x per second while dragging
