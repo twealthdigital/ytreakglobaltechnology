@@ -256,3 +256,18 @@ hwwTabs.forEach(tab => {
     }, { passive: true });
   });
 })();
+
+// ── Lock animated elements permanently after first animation ──
+// Prevents opacity:0 flash when scrolling back to hero on slow devices
+(function() {
+  const animated = document.querySelectorAll(
+    '.hero-title, .hero-sub, .hero-card, .hero-stats'
+  );
+  animated.forEach(el => {
+    el.addEventListener('animationend', () => {
+      el.style.opacity  = '1';
+      el.style.transform = 'translateY(0)';
+      el.style.animation = 'none'; // stop the animation, lock the state
+    }, { once: true }); // fires only once, then removes itself
+  });
+})();
