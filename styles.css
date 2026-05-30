@@ -14,8 +14,8 @@
   --border:   rgba(96, 165, 250, 0.16);
   --text:     #EFF6FF;
   --muted:    #5E7BAA;
-  --fb: 'Courier New', 'Lucida Console', monospace;
-  --ft: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fb: 'Audiowide', sans-serif;
+  --ft: 'Manrope', sans-serif;
 }
 
 [data-theme="light"] {
