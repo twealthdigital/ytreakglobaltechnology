@@ -295,7 +295,7 @@ body {
   width: 210px; height: 270px;
   background: radial-gradient(circle, rgba(59,130,246,.52), transparent 70%);
   top: 14%; left: 4%;
-  animation: bf 8s ease-in-out infinite;
+  animation: bf 8s ease-in-out infinite; animation-fill-mode: both;
 }
 .blob-bl {
   width: 145px; height: 185px;
@@ -337,7 +337,7 @@ body {
   letter-spacing: -.02em;
   margin-bottom: 1.4rem;
   opacity: 0;
-  animation: fadeUp .8s ease forwards .15s;
+  animation: fadeUp .8s ease both .15s;
 }
 
 .grad-text {
@@ -353,7 +353,7 @@ body {
   line-height: 1.85;
   margin-bottom: 2.2rem;
   opacity: 0;
-  animation: fadeUp .8s ease forwards .3s;
+  animation: fadeUp .8s ease both .3s;
 }
 
 /* Input card */
@@ -369,7 +369,7 @@ body {
     0 8px 32px rgba(0,0,0,.28),
     inset 0 1px 0 rgba(96,165,250,.07);
   opacity: 0;
-  animation: fadeUp .8s ease forwards .44s;
+  animation: fadeUp .8s ease both .44s;
 }
 
 .hero-input {
@@ -421,7 +421,7 @@ body {
   gap: 2rem;
   flex-wrap: wrap;
   opacity: 0;
-  animation: fadeUp .8s ease forwards .58s;
+  animation: fadeUp .8s ease both .58s;
 }
 .stat { text-align: center; }
 .sn {
