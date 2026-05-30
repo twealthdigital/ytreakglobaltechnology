@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>YTGT</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -14,7 +13,7 @@
     <div class="nav-c">
 
       <a class="nav-logo" href="#">
-        <img src="ytreaklogo.png" alt="YTGT" class="logo-img" />
+        <img decoding="async" loading="lazy" src="ytreaklogo.png" alt="YTGT" class="logo-img" />
         <div class="logo-text">
           <span class="logo-mark">YTGT</span>
           <span class="logo-full">Y-treak Global Technology</span>
@@ -134,10 +133,10 @@
 
       <div class="about-media">
         <div class="about-img-top">
-          <img src="aboutsectionimg1.webp" alt="Team collaboration" />
+          <img decoding="async" loading="lazy" src="aboutsectionimg1.webp" alt="Team collaboration" />
         </div>
         <div class="about-img-bot">
-          <img src="aboutsectionimg2.webp" alt="Tech workspace" />
+          <img decoding="async" loading="lazy" src="aboutsectionimg2.webp" alt="Tech workspace" />
         </div>
         <div class="about-stat-card">
           <span class="asc-num grad-text">50+</span>
@@ -250,7 +249,7 @@
     <!-- Bottom left video -->
     <div class="svc-img-card">
       <div class="svc-img-wrap">
-        <video autoplay muted loop playsinline>
+        <video id="svcVideo1" muted playsinline preload="none">
           <source src="serviceuiuxvideo.mp4" type="video/mp4" />
         </video>
         <div class="svc-img-label">
@@ -265,7 +264,7 @@
     <!-- Bottom right video -->
     <div class="svc-img-card">
       <div class="svc-img-wrap">
-        <video autoplay muted loop playsinline>
+        <video id="svcVideo2" muted playsinline preload="none">
           <source src="servicemobilevideo.mp4" type="video/mp4" />
         </video>
         <div class="svc-img-label">
@@ -423,21 +422,21 @@
     <div class="hww-right">
       <div class="hww-slider-track" id="hwwSliderTrack">
         <div class="hww-slide">
-          <img src="howslider1image.webp" alt="Discovery phase" />
+          <img decoding="async" loading="lazy" src="howslider1image.webp" alt="Discovery phase" />
           <div class="hww-slide-caption">
             <span>We listen first.</span>
             <span>Your vision drives everything.</span>
           </div>
         </div>
         <div class="hww-slide">
-          <img src="howslider2image.webp" alt="Design phase" />
+          <img decoding="async" loading="lazy" src="howslider2image.webp" alt="Design phase" />
           <div class="hww-slide-caption">
             <span>Pixel-perfect designs.</span>
             <span>Crafted for real users.</span>
           </div>
         </div>
         <div class="hww-slide">
-          <img src="howslider3image.webp" alt="Build phase" />
+          <img decoding="async" loading="lazy" src="howslider3image.webp" alt="Build phase" />
           <div class="hww-slide-caption">
             <span>Clean code. Solid results.</span>
             <span>Built to scale with you.</span>
@@ -451,6 +450,5 @@
 
 <script src="script.js"></script>
 
-  <script src="script.js"></script>
 </body>
 </html>
