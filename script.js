@@ -1,10 +1,9 @@
 /* ══════════════════════════════════════════
-   YTGT — script.js  |  Lightweight
+   YTGT — script.js  |  Optimised for low-end mobile
 ══════════════════════════════════════════ */
 
-// ── Fixed header — add 'scrolled' class after hero ──
+// ── Fixed header ──
 const navMain = document.getElementById('navMain');
-
 window.addEventListener('scroll', () => {
   navMain.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
@@ -24,18 +23,15 @@ function closeDrawer() {
   drawer.classList.remove('open');
   document.body.style.overflow = '';
 }
-
-document.querySelectorAll('.hamburger').forEach(btn => {
-  btn.addEventListener('click', openDrawer);
-});
+document.querySelectorAll('.hamburger').forEach(btn => btn.addEventListener('click', openDrawer));
 drawerClose.addEventListener('click', closeDrawer);
 overlay.addEventListener('click', closeDrawer);
 
 // ── Theme toggle ──
-const html      = document.documentElement;
-const themeBtn  = document.getElementById('themeBtn');
-const iconMoon  = themeBtn.querySelector('.icon-moon');
-const iconSun   = themeBtn.querySelector('.icon-sun');
+const html     = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+const iconMoon = themeBtn.querySelector('.icon-moon');
+const iconSun  = themeBtn.querySelector('.icon-sun');
 let dark = true;
 
 themeBtn.addEventListener('click', () => {
@@ -50,237 +46,220 @@ const words = document.querySelectorAll('.tw');
 let wIdx = 0;
 
 function cycleWord() {
-  // Current word falls down
   words[wIdx].classList.remove('active');
-
-  // Next word rises up (slight delay so fall starts first)
   wIdx = (wIdx + 1) % words.length;
   setTimeout(() => words[wIdx].classList.add('active'), 120);
 }
-
-// Start after hero animations finish
 setTimeout(() => setInterval(cycleWord, 2800), 1600);
 
-// ── Lightweight Canvas ──
+// ── Canvas (hero background) ──
+// Skip canvas entirely on low-end devices (saves the most battery/CPU)
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canvas = document.getElementById('heroCanvas');
-const ctx    = canvas.getContext('2d');
-let W, H, pts;
 
-function resize() {
-  W = canvas.width  = window.innerWidth;
-  H = canvas.height = canvas.parentElement.offsetHeight;
-}
+if (!prefersReduced && canvas) {
+  const ctx = canvas.getContext('2d', { alpha: true });
+  let W, H, pts, animId, isVisible = true;
 
-// Simple particle — no connection lines (keeps it O(n) not O(n²))
-class Dot {
-  constructor() { this.r(); }
-  r() {
-    this.x  = Math.random() * W;
-    this.y  = Math.random() * H;
-    this.vx = (Math.random() - .5) * .4;
-    this.vy = (Math.random() - .5) * .4;
-    this.sz = Math.random() * 1.5 + .4;
-    this.a  = Math.random() * .45 + .08;
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight;
   }
-  tick() {
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.x < -4 || this.x > W+4 || this.y < -4 || this.y > H+4) this.r();
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.sz, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(96,165,250,${this.a})`;
-    ctx.fill();
-  }
-}
 
-function drawGrid() {
-  const s = 68;
-  ctx.lineWidth   = .5;
-  ctx.strokeStyle = 'rgba(59,130,246,.07)';
-  for (let x = 0; x <= W; x += s) {
-    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
-  }
-  for (let y = 0; y <= H; y += s) {
-    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-  }
-  // Dot intersections
-  ctx.fillStyle = 'rgba(96,165,250,.11)';
-  for (let x = 0; x <= W; x += s)
-    for (let y = 0; y <= H; y += s) {
-      ctx.beginPath(); ctx.arc(x, y, 1.1, 0, Math.PI*2); ctx.fill();
+  // Fewer particles on small screens — 8 on mobile, 20 on desktop
+  const PARTICLE_COUNT = window.innerWidth < 768 ? 8 : 20;
+
+  class Dot {
+    constructor() { this.reset(); }
+    reset() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - .5) * .4;
+      this.vy = (Math.random() - .5) * .4;
+      this.sz = Math.random() * 1.5 + .4;
+      this.a  = Math.random() * .45 + .08;
     }
-}
-
-function loop() {
-  ctx.clearRect(0, 0, W, H);
-  drawGrid();
-  pts.forEach(p => p.tick());
-  requestAnimationFrame(loop);
-}
-
-function initCanvas() {
-  resize();
-  pts = Array.from({ length: 20 }, () => new Dot());
-}
-
-let animId;
-
-function loop() {
-  ctx.clearRect(0, 0, W, H);
-  drawGrid();
-  pts.forEach(p => p.tick());
-  animId = requestAnimationFrame(loop);
-}
-
-function stopLoop() {
-  if (animId) cancelAnimationFrame(animId);
-}
-
-initCanvas();
-loop();
-
-// Pause canvas when off screen
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      loop();
-    } else {
-      stopLoop();
+    tick() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < -4 || this.x > W + 4 || this.y < -4 || this.y > H + 4) this.reset();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.sz, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(96,165,250,${this.a})`;
+      ctx.fill();
     }
+  }
+
+  // Pre-build grid path once — don't recalculate every frame
+  let gridPath = null;
+  function buildGrid() {
+    const s = 68;
+    gridPath = new Path2D();
+    for (let x = 0; x <= W; x += s) { gridPath.moveTo(x, 0); gridPath.lineTo(x, H); }
+    for (let y = 0; y <= H; y += s) { gridPath.moveTo(0, y); gridPath.lineTo(W, y); }
+  }
+
+  function drawGrid() {
+    ctx.lineWidth   = .5;
+    ctx.strokeStyle = 'rgba(59,130,246,.07)';
+    ctx.stroke(gridPath);
+    // intersection dots
+    const s = 68;
+    ctx.fillStyle = 'rgba(96,165,250,.11)';
+    for (let x = 0; x <= W; x += s)
+      for (let y = 0; y <= H; y += s) {
+        ctx.beginPath(); ctx.arc(x, y, 1.1, 0, Math.PI * 2); ctx.fill();
+      }
+  }
+
+  function loop() {
+    if (!isVisible) return;
+    ctx.clearRect(0, 0, W, H);
+    drawGrid();
+    pts.forEach(p => p.tick());
+    animId = requestAnimationFrame(loop);
+  }
+
+  function startLoop() { if (!animId) animId = requestAnimationFrame(loop); }
+  function stopLoop()  { cancelAnimationFrame(animId); animId = null; }
+
+  function init() {
+    resize();
+    buildGrid();
+    pts = Array.from({ length: PARTICLE_COUNT }, () => new Dot());
+    startLoop();
+  }
+
+  // Pause when hero scrolls out of view
+  new IntersectionObserver(entries => {
+    isVisible = entries[0].isIntersecting;
+    isVisible ? startLoop() : stopLoop();
+  }, { threshold: 0.05 }).observe(document.querySelector('.hero'));
+
+  // Pause when tab is hidden — saves CPU/battery on Android
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stopLoop() : (isVisible && startLoop());
   });
-});
-observer.observe(document.querySelector('.hero'));
 
-window.addEventListener('resize', resize, { passive: true });
+  // Debounce resize so it doesn't fire 60x per second while dragging
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { resize(); buildGrid(); }, 150);
+  }, { passive: true });
+
+  init();
+} else if (canvas) {
+  // Hide canvas if reduced-motion is preferred
+  canvas.style.display = 'none';
+}
 
 // ── Success Modal ──
 function showSuccessModal(msg) {
-  const overlay = document.createElement("div");
-  overlay.style.cssText = `
-    position:fixed;inset:0;background:rgba(0,0,0,0);
-    z-index:9999;display:flex;align-items:flex-end;
-    justify-content:center;padding-bottom:2rem;
-    transition:background .35s ease;
-  `;
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2rem;transition:background .35s ease;';
 
-  const modal = document.createElement("div");
-  modal.style.cssText = `
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:24px;
-    padding:2.5rem 2rem;
-    text-align:center;
-    max-width:380px;
-    width:90%;
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    box-shadow:0 -8px 40px rgba(59,130,246,0.15);
-    transform:translateY(120%);
-    opacity:0;
-    transition:transform .55s cubic-bezier(.16,1,.3,1), opacity .4s ease;
-  `;
-
+  const modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.5rem 2rem;text-align:center;max-width:380px;width:90%;box-shadow:0 -8px 40px rgba(59,130,246,0.15);transform:translateY(120%);opacity:0;transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .4s ease;';
   modal.innerHTML = `
     <div style="font-size:2.8rem;margin-bottom:1rem;">✅</div>
     <h3 style="font-family:var(--ft);font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:.6rem;">${msg || 'Message Sent!'}</h3>
     <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.5rem;">Thank you! We'll get back to you soon.</p>
-    <button id="closeSuccessModal" style="background:var(--blue);color:#fff;border:none;padding:.6rem 1.8rem;border-radius:100px;font-size:.88rem;font-weight:600;cursor:pointer;transition:opacity .2s;">Got it</button>
+    <button id="closeSuccessModal" style="background:var(--blue);color:#fff;border:none;padding:.6rem 1.8rem;border-radius:100px;font-size:.88rem;font-weight:600;cursor:pointer;">Got it</button>
   `;
 
-  overlay.appendChild(modal);
-  document.body.appendChild(overlay);
+  wrap.appendChild(modal);
+  document.body.appendChild(wrap);
 
-  // Animate in
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      overlay.style.background = "rgba(0,0,0,0.5)";
-      modal.style.transform = "translateY(0)";
-      modal.style.opacity = "1";
-    });
-  });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    wrap.style.background = 'rgba(0,0,0,0.5)';
+    modal.style.transform = 'translateY(0)';
+    modal.style.opacity   = '1';
+  }));
 
   function closeModal() {
-    overlay.style.background = "rgba(0,0,0,0)";
-    modal.style.transform = "translateY(120%)";
-    modal.style.opacity = "0";
-    setTimeout(() => overlay.remove(), 500);
+    wrap.style.background  = 'rgba(0,0,0,0)';
+    modal.style.transform  = 'translateY(120%)';
+    modal.style.opacity    = '0';
+    setTimeout(() => wrap.remove(), 500);
   }
-
-  document.getElementById("closeSuccessModal").addEventListener("click", closeModal);
-  overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
+  document.getElementById('closeSuccessModal').addEventListener('click', closeModal);
+  wrap.addEventListener('click', e => { if (e.target === wrap) closeModal(); });
 }
 
-// ── Contact Form (Web3Forms) ──
+// ── Contact Form ──
 const contactForm = document.getElementById('heroContactForm');
 if (contactForm) {
-  contactForm.addEventListener("submit", async function(e) {
+  contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = contactForm.querySelector("button[type='submit']");
     const orig = btn ? btn.innerHTML : '';
-    if (btn) { btn.innerHTML = 'Sending...'; btn.disabled = true; }
+    if (btn) { btn.innerHTML = 'Sending…'; btn.disabled = true; }
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: new FormData(contactForm)
-      });
+      const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(contactForm) });
       const data = await res.json();
-      if (data.success) {
-        showSuccessModal("Message Sent!");
-        contactForm.reset();
-      } else {
-        showSuccessModal("Failed to send. Please try again.");
-      }
+      showSuccessModal(data.success ? 'Message Sent!' : 'Failed to send. Please try again.');
+      if (data.success) contactForm.reset();
     } catch {
-      showSuccessModal("Network error. Please email us directly.");
+      showSuccessModal('Network error. Please email us directly.');
     } finally {
       if (btn) { btn.innerHTML = orig; btn.disabled = false; }
     }
   });
 }
 
-// ── How We Work Tabs ──
+// ── How We Work Tabs — no auto-scroll, tab 0 starts active ──
 const hwwTabs = document.querySelectorAll('.hww-tab');
-let hwwCurrent = 0;
-let hwwInterval;
 
 function setHwwTab(index) {
-  hwwTabs.forEach(t => {
-    t.classList.remove('active');
-    t.style.animation = '';
-  });
-  
-  const activeTab = hwwTabs[index];
-  activeTab.classList.add('active');
-  
-  // Pop-bounce effect on the active tab
-  activeTab.style.animation = 'hwwPop .45s cubic-bezier(.16,1,.3,1)';
-  setTimeout(() => {
-    activeTab.style.animation = '';
-  }, 450);
-  
-  hwwCurrent = index;
+  hwwTabs.forEach((t, i) => t.classList.toggle('active', i === index));
 }
 
-// Click to control
+// Click to switch tab
 hwwTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const idx = parseInt(tab.dataset.tab);
-    setHwwTab(idx);
-    resetHwwAuto();
-  });
+  tab.addEventListener('click', () => setHwwTab(parseInt(tab.dataset.tab)));
 });
 
-// Auto-scroll tabs every 3s
-function startHwwAuto() {
-  hwwInterval = setInterval(() => {
-    hwwCurrent = (hwwCurrent + 1) % hwwTabs.length;
-    setHwwTab(hwwCurrent);
-  }, 3000);
-}
+// Tab 0 is active by default (already in HTML), nothing else needed
 
-function resetHwwAuto() {
-  clearInterval(hwwInterval);
-  startHwwAuto();
-}
+// ── Video: play 5 times then stop; hover/tap to play once more ──
+(function() {
+  const videos = [
+    document.getElementById('svcVideo1'),
+    document.getElementById('svcVideo2')
+  ].filter(Boolean);
 
-if (hwwTabs.length) startHwwAuto();
+  videos.forEach(vid => {
+    let playCount = 0;
+    const MAX_PLAYS = 5;
+
+    // Auto-start when video enters viewport
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && playCount < MAX_PLAYS) {
+        vid.play().catch(() => {});
+      }
+    }, { threshold: 0.3 });
+    observer.observe(vid);
+
+    vid.addEventListener('ended', () => {
+      playCount++;
+      if (playCount < MAX_PLAYS) {
+        vid.play().catch(() => {});
+      }
+      // After 5 plays: video stays paused on last frame
+    });
+
+    // Desktop: hover plays once (only if already done autoplay)
+    vid.parentElement.addEventListener('mouseenter', () => {
+      if (vid.paused) vid.play().catch(() => {});
+    });
+    vid.parentElement.addEventListener('mouseleave', () => {
+      if (!vid.paused) vid.pause();
+    });
+
+    // Mobile: tap plays once
+    vid.parentElement.addEventListener('touchstart', () => {
+      if (vid.paused) vid.play().catch(() => {});
+    }, { passive: true });
+  });
+})();
