@@ -261,7 +261,44 @@ hwwTabs.forEach(tab => {
   });
 })();
 
-// ── Lock animated elements permanently after first animation ──
+
+// ── Our Code Tabs — horizontal slide ──
+(function() {
+  const tabs   = document.querySelectorAll('.s-tab');
+  const track  = document.getElementById('s-ourcode-track');
+  const clip   = document.getElementById('s-ourcode-clip');
+  const slides = track ? track.querySelectorAll('.s-slide') : [];
+  if (!tabs.length || !track || !clip || !slides.length) return;
+
+  let cur = 0;
+
+  function setWidths() {
+    const w = clip.clientWidth;
+    slides.forEach(s => { s.style.width = w + 'px'; });
+  }
+
+  function goTo(i) {
+    tabs[cur].classList.remove('s-tab-active');
+    cur = i;
+    tabs[cur].classList.add('s-tab-active');
+    track.style.transform = 'translateX(-' + (i * clip.clientWidth) + 'px)';
+  }
+
+  // Use index-based click handler (works regardless of data attribute name)
+  tabs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => { setWidths(); goTo(cur); }, 150);
+  }, { passive: true });
+
+  // Init — setWidths first, then goTo(0) to properly render the first slide
+  setWidths();
+  goTo(0);
+})();
+
+
 // Prevents opacity:0 flash when scrolling back to hero on slow devices
 (function() {
   const animated = document.querySelectorAll(
