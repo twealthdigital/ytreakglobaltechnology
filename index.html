@@ -33,7 +33,20 @@
           <li><a href="#" class="active">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Services</a></li>
-          <li><a href="#">Portfolio</a></li>
+          <li class="nav-dropdown">
+            <a href="#" class="nav-drop-toggle">
+              Skills
+              <svg class="nav-drop-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">AI Integrations</a></li>
+              <li><a href="#">Marketing</a></li>
+              <li><a href="#">Development/Design</a></li>
+              <li><a href="#">Video Editing</a></li>
+              <li><a href="#">Social Media Management</a></li>
+            </ul>
+          </li>
+          <li><a href="#portfolio">Portfolio</a></li>
         </ul>
       </div>
 
@@ -56,7 +69,20 @@
       <li><a href="#">Home</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Services</a></li>
-      <li><a href="#">Portfolio</a></li>
+      <li class="drawer-accordion" id="drawerSkillsAccordion">
+        <button class="drawer-accordion-toggle" id="drawerSkillsToggle">
+          Skills
+          <svg class="drawer-accordion-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul class="drawer-submenu" id="drawerSkillsSubmenu">
+          <li><a href="#">AI Integrations</a></li>
+          <li><a href="#">Marketing</a></li>
+          <li><a href="#">Development/Design</a></li>
+          <li><a href="#">Video Editing</a></li>
+          <li><a href="#">Social Media Management</a></li>
+        </ul>
+      </li>
+      <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#" class="drawer-cta">Contact Us</a></li>
     </ul>
     <div class="drawer-footer">
@@ -778,58 +804,305 @@
       </div>
     </div>
 
-    <!-- Main Testimonial Cards (3-column) -->
-    <div class="testimonials-cards">
+    <!-- Main Testimonial Carousel -->
+    <div class="testimonials-carousel">
+      <div class="t-car-viewport" id="tCarViewport">
+        <div class="t-car-track" id="tCarTrack">
 
-      <!-- LEFT CARD -->
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">"I was honestly skeptical at first — we'd been burned by agencies before. But from the very first strategy call, I could tell YTGT was different. They listened more than they talked, asked the right questions, and truly understood what we needed. The final product was absolutely stunning. Our conversion rates have doubled, and our customers constantly compliment the user experience. Worth every penny and more."</p>
-        <div class="testimonial-client">
-          <div class="testimonial-client-img">
-            <img src="client1.webp" alt="Sarah Johnson" loading="lazy"/>
+          <!-- SLIDE 1 -->
+          <div class="t-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-quote">"I was honestly skeptical at first — we'd been burned by agencies before. But from the very first strategy call, I could tell YTGT was different. They listened more than they talked, asked the right questions, and truly understood what we needed. The final product was absolutely stunning. Our conversion rates have doubled, and our customers constantly compliment the user experience. Worth every penny and more."</p>
+              <div class="testimonial-client">
+                <div class="testimonial-client-img">
+                  <img src="client1.webp" alt="Sarah Johnson" loading="lazy"/>
+                </div>
+                <div class="testimonial-client-info">
+                  <h4 class="testimonial-client-name">Sarah Johnson</h4>
+                  <p class="testimonial-client-company">Creative Director, Velora Studios</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="testimonial-client-info">
-            <h4 class="testimonial-client-name">Sarah Johnson</h4>
-            <p class="testimonial-client-company">Creative Director, Velora Studios</p>
+
+          <!-- SLIDE 2 -->
+          <div class="t-slide">
+            <div class="testimonial-card testimonial-card-featured">
+              <span class="testimonial-top-tag">Top Review</span>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-quote featured-quote">"Where do I even begin? The AI automation solution YTGT built for us has completely revolutionized how we operate. What used to take my team 30+ hours a week now runs automatically in the background. But beyond the tech — the genuine care and support we've received is what keeps us coming back. They don't just finish a project and disappear. They check in, optimize, and constantly look for ways to add more value. If you're looking for a partner who treats your business like their own, this is the team."</p>
+              <div class="testimonial-client testimonial-client-featured">
+                <div class="testimonial-client-img featured-img">
+                  <img src="client2.webp" alt="Michael Chen" loading="lazy"/>
+                </div>
+                <div class="testimonial-client-info">
+                  <h4 class="testimonial-client-name">Michael Chen</h4>
+                  <p class="testimonial-client-company">CEO, Apex Innovations</p>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- SLIDE 3 -->
+          <div class="t-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-quote">"I've worked with a lot of development teams over the past decade, and YTGT stands head and shoulders above the rest. Their project management is flawless, we always knew exactly what was happening at every stage of the project. They delivered our mobile app two weeks ahead of schedule, and the quality was impeccable. Our users are loving it, and we're already planning our next phase of work with them. Cannot recommend them highly enough."</p>
+              <div class="testimonial-client">
+                <div class="testimonial-client-img">
+                  <img src="client3.webp" alt="Diana Williams" loading="lazy"/>
+                </div>
+                <div class="testimonial-client-info">
+                  <h4 class="testimonial-client-name">Diana Williams</h4>
+                  <p class="testimonial-client-company">Founder, Stellar Growth Partners</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 4 -->
+          <div class="t-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-quote">"Our email and lead generation funnels were a mess before YTGT stepped in. Within weeks they restructured everything — smarter automation, cleaner workflows, and a CRM that actually makes sense. Our response time to new leads dropped from days to minutes. It's rare to find a team this technical that still communicates like real humans."</p>
+              <div class="testimonial-client">
+                <div class="testimonial-client-img">
+                  <img src="james.webp" alt="James allen" loading="lazy"/>
+                </div>
+                <div class="testimonial-client-info">
+                  <h4 class="testimonial-client-name">James Allen</h4>
+                  <p class="testimonial-client-company">Operations Lead, Brightline Logistics</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- CENTER FEATURED CARD -->
-      <div class="testimonial-card testimonial-card-featured">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote featured-quote">"Where do I even begin? The AI automation solution YTGT built for us has completely revolutionized how we operate. What used to take my team 30+ hours a week now runs automatically in the background. But beyond the tech — the genuine care and support we've received is what keeps us coming back. They don't just finish a project and disappear. They check in, optimize, and constantly look for ways to add more value. If you're looking for a partner who treats your business like their own, this is the team."</p>
-        <div class="testimonial-client testimonial-client-featured">
-          <div class="testimonial-client-img featured-img">
-            <img src="client2.webp" alt="Michael Chen" loading="lazy"/>
-          </div>
-          <div class="testimonial-client-info">
-            <h4 class="testimonial-client-name">Michael Chen</h4>
-            <p class="testimonial-client-company">CEO, Apex Innovations</p>
-          </div>
+      <div class="t-car-controls">
+        <button class="t-car-arrow t-car-prev" id="tCarPrev" aria-label="Previous testimonial">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="t-car-dots" id="tCarDots"></div>
+        <button class="t-car-arrow t-car-next" id="tCarNext" aria-label="Next testimonial">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ PORTFOLIO SECTION ═══ -->
+<section class="portfolio-section" id="portfolio">
+  <div class="portfolio-inner">
+
+    <div class="portfolio-header">
+      <div class="about-badge portfolio-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>
+        Our Work
+      </div>
+      <h2 class="portfolio-title">
+        Recent <span class="grad-text">Projects</span>
+      </h2>
+      <p class="portfolio-sub">A glimpse into the products, platforms and brands we've shipped for clients around the world.</p>
+    </div>
+
+    <div class="portfolio-cards">
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-img">
+          <div class="portfolio-frame-bar"><span></span><span></span><span></span></div>
+          <img src="aiautomation.webp" alt="Ai Automation Agent" loading="lazy"/>
+        </div>
+        <div class="portfolio-card-body">
+          <span class="portfolio-tag">Ai Automation • Ai Agent</span>
+          <h3 class="portfolio-card-title">Ai Automation Agent</h3>
+          <a href="#" class="portfolio-card-link">
+            View Project
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
         </div>
       </div>
 
-      <!-- RIGHT CARD -->
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">"I've worked with a lot of development teams over the past decade, and YTGT stands head and shoulders above the rest. Their project management is flawless, we always knew exactly what was happening at every stage of the project. They delivered our mobile app two weeks ahead of schedule, and the quality was impeccable. Our users are loving it, and we're already planning our next phase of work with them. Cannot recommend them highly enough."</p>
-        <div class="testimonial-client">
-          <div class="testimonial-client-img">
-            <img src="client3.webp" alt="Diana Williams" loading="lazy"/>
-          </div>
-          <div class="testimonial-client-info">
-            <h4 class="testimonial-client-name">Diana Williams</h4>
-            <p class="testimonial-client-company">Founder, Stellar Growth Partners</p>
-          </div>
+      <div class="portfolio-card">
+        <div class="portfolio-card-img">
+          <div class="portfolio-frame-bar"><span></span><span></span><span></span></div>
+          <img src="mobileapp.webp" alt="Shopio Mobile App" loading="lazy"/>
+        </div>
+        <div class="portfolio-card-body">
+          <span class="portfolio-tag">Mobile App • React Native/Js</span>
+          <h3 class="portfolio-card-title">Shopio Ecommerce</h3>
+          <a href="#" class="portfolio-card-link">
+            View Project
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-img">
+          <div class="portfolio-frame-bar"><span></span><span></span><span></span></div>
+          <img src="ecommerce.webp" alt="A-Luxe Skin beauty clinic website" loading="lazy"/>
+        </div>
+        <div class="portfolio-card-body">
+          <span class="portfolio-tag">Beauty • Website Redesign</span>
+          <h3 class="portfolio-card-title">A-Luxe Skin Clinic</h3>
+          <a href="#" class="portfolio-card-link">
+            View Project
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
         </div>
       </div>
 
     </div>
 
+    <div class="portfolio-cta-wrap">
+      <a href="portfolio.html" class="team-cta-btn">
+        View Full Portfolio
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
   </div>
 </section>
+
+
+<!-- ═══ CTA SECTION ═══ -->
+<section class="cta-section" id="ctaSection">
+  <div class="cta-card">
+    <div class="cta-glow cta-glow-a"></div>
+    <div class="cta-glow cta-glow-b"></div>
+
+    <div class="cta-content">
+      <div class="cta-avatars">
+        <div class="cta-avatar"><img src="isaac.webp" alt="Isaac" loading="lazy"/></div>
+        <div class="cta-avatar"><img src="joshua.webp" alt="Joshua" loading="lazy"/></div>
+        <div class="cta-avatar"><img src="fortune.webp" alt="Fortune" loading="lazy"/></div>
+        <div class="cta-avatar"><img src="christabel.webp" alt="Christabel" loading="lazy"/></div>
+        <div class="cta-avatar cta-avatar-plus">+50</div>
+      </div>
+
+      <h2 class="cta-title">Let's Build Something Worth Bragging About</h2>
+      <p class="cta-sub">From strategy to launch, the YTGT team is ready to turn your idea into a product your customers love.</p>
+
+      <a href="#footerContact" class="cta-btn-light">Start Your Project Today</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+      <!-- Brand column -->
+      <div class="footer-col footer-brand-col">
+        <a class="nav-logo footer-logo" href="#">
+          <img src="ytreaklogo.png" alt="YTGT" class="logo-img" />
+          <div class="logo-text">
+            <span class="logo-mark">YTGT</span>
+            <span class="logo-full">Y-treak Global Technology</span>
+          </div>
+        </a>
+        <p class="footer-desc">We build websites, AI automations and mobile apps for businesses ready to grow worldwide.</p>
+        <div class="footer-socials">
+          <!-- <a href="#" class="footer-social-btn" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a> -->
+          <a href="www.linkedin.com/in/ytreak-global-74b989412" class="footer-social-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <!-- <a href="#" class="footer-social-btn" aria-label="X / Twitter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M4 4l16 16M20 4L4 20"/></svg>
+          </a> -->
+          <a href="https://www.tiktok.com/@ytreakglobal?is_from_webapp=1&sender_device=pc" class="footer-social-btn" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M16 8.5a5 5 0 0 0 4-4.5h-3.5v13a3.5 3.5 0 1 1-3.5-3.5"/></svg>
+          </a>
+          <!-- <a href="#" class="footer-social-btn" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a> -->
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+      </div>
+
+      <!-- Skills -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">Skills</h4>
+        <ul class="footer-links">
+          <li><a href="#">AI Integrations</a></li>
+          <li><a href="#">Marketing</a></li>
+          <li><a href="#">Development/Design</a></li>
+          <li><a href="#">Video Editing</a></li>
+          <li><a href="#">Social Media Management</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact + form -->
+      <div class="footer-col footer-contact-col" id="footerContact">
+        <h4 class="footer-col-title">Get In Touch</h4>
+        <ul class="footer-contact-list">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+            ytreakglobal@gmail.com
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +234 800 000 0000
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Ondo, Nigeria
+          </li>
+        </ul>
+
+        <form id="footerContactForm" class="footer-form">
+          <input type="hidden" name="access_key" value="6f4b18be-7b98-4407-8b73-2a14abdd9d8f" />
+          <input type="hidden" name="subject" value="New Footer Inquiry - YTGT" />
+          <input type="hidden" name="from_name" value="YTGT Website Footer" />
+          <input type="email" name="email" class="footer-input" placeholder="Your email address" required />
+          <textarea name="message" class="footer-input footer-textarea" rows="3" placeholder="Tell us what you need..." required></textarea>
+          <button type="submit" class="footer-send-btn">
+            Send Message
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <div class="footer-form-status" id="footerFormStatus"></div>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Ytreak Global Technology. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
 
 
 <script src="script.js"></script>
