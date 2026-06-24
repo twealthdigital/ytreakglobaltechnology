@@ -27,6 +27,30 @@ document.querySelectorAll('.hamburger').forEach(btn => btn.addEventListener('cli
 drawerClose.addEventListener('click', closeDrawer);
 overlay.addEventListener('click', closeDrawer);
 
+// ── Nav "Skills" dropdown (click-toggle, works alongside CSS :hover) ──
+(function() {
+  const dropdown = document.querySelector('.nav-dropdown');
+  if (!dropdown) return;
+  const toggle = dropdown.querySelector('.nav-drop-toggle');
+
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    dropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+  });
+})();
+
+// ── Drawer "Skills" accordion ──
+(function() {
+  const accordion = document.getElementById('drawerSkillsAccordion');
+  const toggle = document.getElementById('drawerSkillsToggle');
+  if (!accordion || !toggle) return;
+  toggle.addEventListener('click', () => accordion.classList.toggle('open'));
+})();
+
 // ── Theme toggle ──
 const html     = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
@@ -310,5 +334,127 @@ hwwTabs.forEach(tab => {
       el.style.transform = 'translateY(0)';
       el.style.animation = 'none'; // stop the animation, lock the state
     }, { once: true }); // fires only once, then removes itself
+  });
+})();
+
+// ── Testimonials Carousel ──
+(function() {
+  const viewport = document.getElementById('tCarViewport');
+  const track     = document.getElementById('tCarTrack');
+  const dotsWrap  = document.getElementById('tCarDots');
+  const prevBtn   = document.getElementById('tCarPrev');
+  const nextBtn   = document.getElementById('tCarNext');
+  if (!track || !viewport || !dotsWrap || !prevBtn || !nextBtn) return;
+
+  const slides = Array.from(track.querySelectorAll('.t-slide'));
+  if (!slides.length) return;
+
+  let visible  = 3;
+  let maxIndex = 0;
+  let idx      = 0;
+
+  function computeVisible() {
+    const w = window.innerWidth;
+    if (w <= 700)  return 1;
+    if (w <= 1000) return 2;
+    return 3;
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i <= maxIndex; i++) {
+      const dot = document.createElement('button');
+      dot.className = 't-car-dot' + (i === idx ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+  }
+
+  function render() {
+    track.style.transform = 'translateX(-' + (idx * (100 / visible)) + '%)';
+    dotsWrap.querySelectorAll('.t-car-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  function goTo(i) {
+    idx = Math.max(0, Math.min(maxIndex, i));
+    render();
+  }
+
+  function update() {
+    visible  = computeVisible();
+    maxIndex = Math.max(0, slides.length - visible);
+    idx      = Math.min(idx, maxIndex);
+    slides.forEach(s => { s.style.flexBasis = (100 / visible) + '%'; s.style.width = (100 / visible) + '%'; });
+    buildDots();
+    render();
+  }
+
+  prevBtn.addEventListener('click', () => goTo(idx <= 0 ? maxIndex : idx - 1));
+  nextBtn.addEventListener('click', () => goTo(idx >= maxIndex ? 0 : idx + 1));
+
+  // Lightweight touch swipe support
+  let touchStartX = 0, touchDeltaX = 0, dragging = false;
+  viewport.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    dragging = true;
+  }, { passive: true });
+  viewport.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    touchDeltaX = e.touches[0].clientX - touchStartX;
+  }, { passive: true });
+  viewport.addEventListener('touchend', () => {
+    if (!dragging) return;
+    if (touchDeltaX > 40)  goTo(idx <= 0 ? maxIndex : idx - 1);
+    else if (touchDeltaX < -40) goTo(idx >= maxIndex ? 0 : idx + 1);
+    dragging = false;
+    touchDeltaX = 0;
+  });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(update, 150);
+  }, { passive: true });
+
+  update();
+})();
+
+
+// ── Footer Contact Form (inline success/error, no popup) ──
+(function() {
+  const form = document.getElementById('footerContactForm');
+  const statusEl = document.getElementById('footerFormStatus');
+  if (!form || !statusEl) return;
+
+  let hideTimer;
+
+  function setStatus(message, type) {
+    clearTimeout(hideTimer);
+    statusEl.textContent = message;
+    statusEl.className = 'footer-form-status show ' + (type === 'success' ? 'footer-form-status-success' : 'footer-form-status-error');
+    hideTimer = setTimeout(() => { statusEl.classList.remove('show'); }, 6000);
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn  = form.querySelector("button[type='submit']");
+    const orig = btn ? btn.innerHTML : '';
+    if (btn) { btn.innerHTML = 'Sending…'; btn.disabled = true; }
+
+    try {
+      const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("✓ Message sent — we'll get back to you soon.", 'success');
+        form.reset();
+      } else {
+        setStatus('Could not send your message. Please try again.', 'error');
+      }
+    } catch {
+      setStatus('Network error. Please email us directly.', 'error');
+    } finally {
+      if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+    }
   });
 })();
